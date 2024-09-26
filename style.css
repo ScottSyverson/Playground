@@ -1,8 +1,26 @@
-body{
-    height: 100%;
+.bg {
+    height: 100vh; 
+    background-image: url(media/wood.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-button{
-    padding: 115px;
+.header{
+    background-color: chocolate;
+    padding: 20px;
 }
 
+.rollbutton {
+    padding: 20px;
+}
+
+.header button{
+    background-color: blueviolet;
+    padding: 2px;
+    max-width: 100px;
+    max-height: 30px;
+}
+
+.keptDice{
+    background-color: green;
+}
