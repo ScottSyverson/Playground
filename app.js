@@ -33,12 +33,6 @@ function rollAllDice() {
     let grabSix = rolledArray.find(num => num == 6);
     if (grabSix && needSix) {
 
-
-        //!limit 6 graphic to just one and delete a rollable die from the array
-        
-
-
-
         let winningDisplay = document.createElement("img");
         winningDisplay.src = "./media/six.png"
         let winRow = document.querySelector(".keptDice");
