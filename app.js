@@ -1,51 +1,102 @@
 
-let dice0 = 0;
-let dice1 = 0;
-let dice2 = 0;
-let dice3 = 0;
-let dice4 = 0;
-let diceArray = [dice0, dice1, dice2, dice3, dice4]
+let diceArray = [0, 0, 0, 0, 0]
 let rollButton = document.getElementById('rollButton');
 let rolledArray = []
 let winningArray = []
 let needSix = true;
-
+let needFive = true;
+let needFour = true;
+let needDoubles = true;
 
 rollButton.addEventListener('click', rollAllDice)
-let leftDice = diceArray.length
+
+//! need a way to limit the number of rolls to 3
 
 function rollAllDice() {
-    //console.log(diceArray)
-    let i = 0;
 
+    let clearImages = document.querySelectorAll(".diceDisplay img")
+
+    for (let index = 0; index < clearImages.length; index++) {
+        clearImages[index].remove();
+        
+    }
+    
+    let i = 0;
     while (i < diceArray.length) {
 
         let rolledDie = Math.floor(Math.random() * 6) + 1;
-
         displayDiceGraphic(rolledDie);
-        //!if rolled die is 6  and we don't have a six, put into success array. if we have a six and rolled die is 5, add to success array. if we have a six and 5 and rolled die is 4, add to success array. Once success is achieved, roll doubles. 
-
         rolledArray.push(rolledDie);
         i++;
     }
-
     console.log(rolledArray)
+
     let grabSix = rolledArray.find(num => num == 6);
     if (grabSix && needSix) {
-
         let winningDisplay = document.createElement("img");
         winningDisplay.src = "./media/six.png"
         let winRow = document.querySelector(".keptDice");
         winRow.append(winningDisplay);
         needSix = false;
+        //remove the six from the array
+        let index6 = rolledArray.indexOf(6);
+        if (index6 > -1) { // only splice array when item is found
+            rolledArray.splice(index6, 1); // 2nd parameter means remove one item only
+        }
+
+        //console.log("rolledArray  " + rolledArray)
+
 
         diceArray.pop();
 
     }
-    
+
+    let grabFive = rolledArray.find(num => num == 5);
+    if (grabFive && needFive && !needSix) {
+        let winningDisplay = document.createElement("img");
+        winningDisplay.src = "./media/five.png"
+        let winRow = document.querySelector(".keptDice");
+        winRow.append(winningDisplay);
+        needFive = false;
+        let index5 = rolledArray.indexOf(5);
+        if (index5 > -1) { // only splice array when item is found
+            rolledArray.splice(index5, 1); // 2nd parameter means remove one item only
+        }
+
+        diceArray.pop();
+
+    }
+
+    let grabFour = rolledArray.find(num => num == 4);
+    if (grabFour && needFour && !needFive && !needSix) {
+        let winningDisplay = document.createElement("img");
+        winningDisplay.src = "./media/four.png"
+        let winRow = document.querySelector(".keptDice");
+        winRow.append(winningDisplay);
+        needFour = false;
+        let index4 = rolledArray.indexOf(4);
+        if (index4 > -1) { // only splice array when item is found
+            rolledArray.splice(index4, 1); // 2nd parameter means remove one item only
+        }
+        diceArray.pop();
+
+    }
+
+    if (!needFour && !needFive && !needSix) {
+
+        if(rolledArray[0] == rolledArray[1]){
+            console.log("you win")
+        }
+
+
+        console.log(rolledArray[0])
+        console.log(rolledArray[1])
+    }
+
+    console.log("end array  " + rolledArray)
+    rolledArray = [];
 
 }
-
 
 
 function displayDiceGraphic(num) {
