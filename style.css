@@ -23,4 +23,24 @@
 
 .keptDice{
     background-color: green;
+    height: 250px;
+}
+
+.winOrLose{
+    background-color: green;
+    font-size: 25px;
+}
+
+.diceDisplay{
+    height: 250px;
+
+}
+
+.newGame{
+    background-color: blueviolet;
+    padding: 2px;
+    max-width: 100px;
+    max-height: 30px;
+    
+    
 }
