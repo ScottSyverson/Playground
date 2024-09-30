@@ -13,12 +13,35 @@ let counter = 0;
 rollButton.addEventListener('click', rollAllDice)
 rollButton.addEventListener('click', handleButtonClick)
 
+newGame.addEventListener('click', resetGame)
+
+function resetGame() {
+    document.getElementById('rollButton').disabled = false;
+    let clearImages = document.querySelectorAll(".diceDisplay img")
+    for (let index = 0; index < clearImages.length; index++) {
+        clearImages[index].remove();
+    }
+    clearImages = document.querySelectorAll(".keptDice img")
+    for (let index = 0; index < clearImages.length; index++) {
+        clearImages[index].remove();
+    }
+    clickCount = 0;
+    diceArray.length = 5;
+    winningArray = []
+    needSix = true;
+    needFive = true;
+    needFour = true;
+    needDoubles = true;
+    canRoll = true;
+    return clickCount;
+}
+
 let clickCount = 0;
-let maxClicks = 20;
+let maxClicks = 3;
 
 function handleButtonClick() {
     clickCount++;
-    if (clickCount >= maxClicks) {
+    if (clickCount > maxClicks) {
         // Disable the button
         document.getElementById('rollButton').disabled = true;
         // message pop up
@@ -122,7 +145,7 @@ function rollAllDice() {
     }
 
     rolledArray = [];
-    
+
 }
 
 function displayDiceGraphic(num) {
@@ -156,17 +179,3 @@ function displayDiceGraphic(num) {
 
 }
 
-
-/*
-
-
-    if (diceArray.length == 0) {
-
-        //!  THIS TRIGGERS AFTER THE BUTTON PUSH. NEED IT TO TRIGGER AFTER THE WIN CONDITIONS ARE MET AND AFTER THE DISPLAY IS UPDATED
-
-        if (!needFour && !needFive && !needSix && !needDoubles) {
-            alert("YOU WIN!");
-
-        }
-        console.log("zero")
-    }*/
