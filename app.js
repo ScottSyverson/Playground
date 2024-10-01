@@ -1,6 +1,5 @@
 
 let diceArray = [0, 0, 0, 0, 0]
-let rollButton = document.getElementById('rollButton');
 let rolledArray = []
 let winningArray = []
 let needSix = true;
@@ -12,8 +11,12 @@ let counter = 0;
 
 rollButton.addEventListener('click', rollAllDice)
 rollButton.addEventListener('click', handleButtonClick)
-
+rulesButton.addEventListener('click', displayRules)
 newGame.addEventListener('click', resetGame)
+
+function displayRules() {
+    alert("The player trys to roll a 6, a 5, and a 4 in that order. These numbers, when rolled, are set aside and are not rolled by the player again. Once these numbers are rolled, the remaining 2 dice are rolled together.  If doubles of any number are rolled, the player recieves a free drink. The player has three rolls to accomplish this.")
+}
 
 function resetGame() {
     document.getElementById('rollButton').disabled = false;
@@ -25,6 +28,7 @@ function resetGame() {
     for (let index = 0; index < clearImages.length; index++) {
         clearImages[index].remove();
     }
+
     clickCount = 0;
     diceArray.length = 5;
     winningArray = []
@@ -37,6 +41,7 @@ function resetGame() {
 }
 
 let clickCount = 0;
+//!remember to adjust the maxClicks
 let maxClicks = 3;
 
 function handleButtonClick() {
@@ -45,7 +50,16 @@ function handleButtonClick() {
         // Disable the button
         document.getElementById('rollButton').disabled = true;
         // message pop up
+        let winTextDisplay = document.createElement("img");
+        winTextDisplay.src = "./media/Lose.jpeg"
+        let wOrLDisplay = document.querySelector(".winOrLose");
+        wOrLDisplay.append(winTextDisplay);
+        document.getElementById('rollButton').disabled = true;
+
         alert("No more rolls left!");
+
+
+
     }
 }
 
@@ -131,8 +145,8 @@ function rollAllDice() {
             displayDiceGraphic(rolledArray[0])
             displayDiceGraphic(rolledArray[1])
 
-            let winTextDisplay = document.createElement("p");
-            winTextDisplay = "FREE DRINK"
+            let winTextDisplay = document.createElement("img");
+            winTextDisplay.src = "./media/Win.jpg"
             let wOrLDisplay = document.querySelector(".winOrLose");
             wOrLDisplay.append(winTextDisplay);
             document.getElementById('rollButton').disabled = true;
@@ -149,33 +163,28 @@ function rollAllDice() {
 }
 
 function displayDiceGraphic(num) {
-    // when recreating this, you only need to change the display.src part for each number and put the rest at the bottom
+
     let display = document.createElement("img");
     if (num == 6) {
         display.src = "./media/six.png"
-        let pic = document.querySelector(".diceDisplay");
-        pic.append(display);
+
     } else if (num == 5) {
         display.src = "./media/five.png"
-        let pic = document.querySelector(".diceDisplay");
-        pic.append(display);
+
     } else if (num == 4) {
         display.src = "./media/four.png"
-        let pic = document.querySelector(".diceDisplay");
-        pic.append(display);
+
     } else if (num == 3) {
         display.src = "./media/three.png"
-        let pic = document.querySelector(".diceDisplay");
-        pic.append(display);
+
     } else if (num == 2) {
         display.src = "./media/two.png"
-        let pic = document.querySelector(".diceDisplay");
-        pic.append(display);
+
     } else if (num == 1) {
         display.src = "./media/one.png"
-        let pic = document.querySelector(".diceDisplay");
-        pic.append(display);
+
     }
+    let pic = document.querySelector(".diceDisplay");
+    pic.append(display);
 
 }
-
