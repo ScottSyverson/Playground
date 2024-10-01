@@ -9,7 +9,7 @@ let needDoubles = true;
 let canRoll = true;
 let counter = 0;
 
-rollButton.addEventListener('click', rollAllDice)
+//rollButton.addEventListener('click', rollAllDice)
 rollButton.addEventListener('click', handleButtonClick)
 rulesButton.addEventListener('click', displayRules)
 newGame.addEventListener('click', resetGame)
@@ -49,34 +49,32 @@ function handleButtonClick() {
     if (clickCount > maxClicks) {
         // Disable the button
         document.getElementById('rollButton').disabled = true;
-        // message pop up
         let winTextDisplay = document.createElement("img");
-        winTextDisplay.src = "./media/Lose.jpeg"
+        winTextDisplay.src = "./media/willy-wonka-and-the-chocolate-factory-gene-wilder.gif"
         let wOrLDisplay = document.querySelector(".winOrLose");
         wOrLDisplay.append(winTextDisplay);
-        document.getElementById('rollButton').disabled = true;
-
+        document.getElementById('rollButton').disabled = true; 
+        // message pop up
         alert("No more rolls left!");
 
+        //!perhaps a custom pop up button would be better
 
 
+
+    }else{
+        rollAllDice();
     }
 }
 
 function rollAllDice() {
-
     //CLEARING THE DISPLAY
     let clearImages = document.querySelectorAll(".diceDisplay img")
     for (let index = 0; index < clearImages.length; index++) {
         clearImages[index].remove();
-
     }
-
     //ROLLING AVAILABLE DICE
-
     let i = 0;
     while (i < diceArray.length) {
-
         //EACH DIE IS ASSIGNED A RANDOM NUMBER
         let rolledDie = Math.floor(Math.random() * 6) + 1;
         //EACH DIE IS DISPLAYED
@@ -85,8 +83,6 @@ function rollAllDice() {
         rolledArray.push(rolledDie);
         i++;
     }
-
-    console.log(rolledArray)
 
     let grabSix = rolledArray.find(num => num == 6);
     if (grabSix && needSix) {
@@ -100,9 +96,7 @@ function rollAllDice() {
         if (index6 > -1) { // only splice array when item is found
             rolledArray.splice(index6, 1); // 2nd parameter means remove one item only
         }
-
         diceArray.pop(); //reduces the number of rollable dice by one
-
     }
 
     let grabFive = rolledArray.find(num => num == 5);
@@ -130,7 +124,6 @@ function rollAllDice() {
             rolledArray.splice(index4, 1);
         }
         diceArray.pop();
-
     }
 
     if (!needFour && !needFive && !needSix) {
@@ -146,20 +139,18 @@ function rollAllDice() {
             displayDiceGraphic(rolledArray[1])
 
             let winTextDisplay = document.createElement("img");
-            winTextDisplay.src = "./media/Win.jpg"
+            winTextDisplay.src = "./media/skeptical-futurama.gif"
             let wOrLDisplay = document.querySelector(".winOrLose");
             wOrLDisplay.append(winTextDisplay);
+
             document.getElementById('rollButton').disabled = true;
 
             console.log("you win")
             needDoubles = false;
             canRoll = false;
-
         }
     }
-
     rolledArray = [];
-
 }
 
 function displayDiceGraphic(num) {
