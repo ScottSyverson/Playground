@@ -1,4 +1,4 @@
-
+//variables
 let diceArray = [0, 0, 0, 0, 0]
 let rolledArray = []
 let winningArray = []
@@ -9,26 +9,28 @@ let needDoubles = true;
 let canRoll = true;
 let counter = 0;
 
-//rollButton.addEventListener('click', rollAllDice)
 rollButton.addEventListener('click', handleButtonClick)
 rulesButton.addEventListener('click', displayRules)
 newGame.addEventListener('click', resetGame)
 
 function displayRules() {
-    alert("The player trys to roll a 6, a 5, and a 4 in that order. These numbers, when rolled, are set aside and are not rolled by the player again. Once these numbers are rolled, the remaining 2 dice are rolled together.  If doubles of any number are rolled, the player recieves a free drink. The player has three rolls to accomplish this.")
+    alert("The player must roll a 6, a 5, and a 4 in that order. These numbers, when rolled, are set aside and are not rolled by the player again. Once these numbers are rolled, the remaining 2 dice are rolled together.  If doubles of any number are rolled, the player recieves a free drink. The player has three rolls to accomplish this.")
 }
 
 function resetGame() {
+    //enable roll button
     document.getElementById('rollButton').disabled = false;
     let clearImages = document.querySelectorAll(".diceDisplay img")
     for (let index = 0; index < clearImages.length; index++) {
         clearImages[index].remove();
     }
+    //clear the dice
     clearImages = document.querySelectorAll(".keptDice img")
     for (let index = 0; index < clearImages.length; index++) {
         clearImages[index].remove();
     }
 
+    //reset variables
     clickCount = 0;
     diceArray.length = 5;
     winningArray = []
@@ -49,6 +51,7 @@ function handleButtonClick() {
     if (clickCount > maxClicks) {
         // Disable the button
         document.getElementById('rollButton').disabled = true;
+        //if you're out of rolls
         let winTextDisplay = document.createElement("img");
         winTextDisplay.src = "./media/willy-wonka-and-the-chocolate-factory-gene-wilder.gif"
         let wOrLDisplay = document.querySelector(".winOrLose");
@@ -56,10 +59,6 @@ function handleButtonClick() {
         document.getElementById('rollButton').disabled = true; 
         // message pop up
         alert("No more rolls left!");
-
-        //!perhaps a custom pop up button would be better
-
-
 
     }else{
         rollAllDice();
@@ -84,8 +83,10 @@ function rollAllDice() {
         i++;
     }
 
+    //grab a six from the array if it is present
     let grabSix = rolledArray.find(num => num == 6);
     if (grabSix && needSix) {
+        //display the dice image in the kept dice area
         let winningDisplay = document.createElement("img");
         winningDisplay.src = "./media/six.png"
         let winRow = document.querySelector(".keptDice");
@@ -127,6 +128,7 @@ function rollAllDice() {
     }
 
     if (!needFour && !needFive && !needSix) {
+        //if doubles are rolled
 
         if (rolledArray[0] === rolledArray[1]) {
 
@@ -146,10 +148,11 @@ function rollAllDice() {
             document.getElementById('rollButton').disabled = true;
 
             console.log("you win")
-            needDoubles = false;
-            canRoll = false;
+            //needDoubles = false;
+            //canRoll = false;
         }
     }
+    //clear the array
     rolledArray = [];
 }
 
