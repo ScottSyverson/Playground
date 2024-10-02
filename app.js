@@ -88,7 +88,7 @@ function rollAllDice() {
     if (grabSix && needSix) {
         //display the dice image in the kept dice area
         let winningDisplay = document.createElement("img");
-        winningDisplay.src = "./media/six.png"
+        winningDisplay.src = "./media/ship.jpg"
         let winRow = document.querySelector(".keptDice");
         winRow.append(winningDisplay);
         needSix = false;
@@ -103,7 +103,7 @@ function rollAllDice() {
     let grabFive = rolledArray.find(num => num == 5);
     if (grabFive && needFive && !needSix) {
         let winningDisplay = document.createElement("img");
-        winningDisplay.src = "./media/five.png"
+        winningDisplay.src = "./media/captain.jpg"
         let winRow = document.querySelector(".keptDice");
         winRow.append(winningDisplay);
         needFive = false;
@@ -116,7 +116,7 @@ function rollAllDice() {
     let grabFour = rolledArray.find(num => num == 4);
     if (grabFour && needFour && !needFive && !needSix) {
         let winningDisplay = document.createElement("img");
-        winningDisplay.src = "./media/four.png"
+        winningDisplay.src = "./media/crew.jpg"
         let winRow = document.querySelector(".keptDice");
         winRow.append(winningDisplay);
         needFour = false;

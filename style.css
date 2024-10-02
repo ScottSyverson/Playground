@@ -82,6 +82,12 @@ color: white;
     width: 50%;
 }
 
+.keptDice img{
+    max-height: 125px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 @media(min-width: 600px){
     .keptDice{
         height: 125px;
