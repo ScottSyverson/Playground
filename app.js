@@ -1,4 +1,3 @@
-//variables
 let diceArray = [0, 0, 0, 0, 0]
 let rolledArray = []
 let winningArray = []
@@ -29,6 +28,10 @@ function resetGame() {
     for (let index = 0; index < clearImages.length; index++) {
         clearImages[index].remove();
     }
+    clearImages = document.querySelectorAll(".winOrLose img")
+    for (let index = 0; index < clearImages.length; index++) {
+        clearImages[index].remove();
+    }
 
     //reset variables
     clickCount = 0;
@@ -39,6 +42,7 @@ function resetGame() {
     needFour = true;
     needDoubles = true;
     canRoll = true;
+    gotDoubles=false;
     return clickCount;
 }
 
@@ -48,19 +52,21 @@ let maxClicks = 3;
 
 function handleButtonClick() {
     clickCount++;
-    if (clickCount > maxClicks) {
+    if (clickCount > maxClicks ) {
         // Disable the button
         document.getElementById('rollButton').disabled = true;
         //if you're out of rolls
         let winTextDisplay = document.createElement("img");
         winTextDisplay.src = "./media/willy-wonka-and-the-chocolate-factory-gene-wilder.gif"
         let wOrLDisplay = document.querySelector(".winOrLose");
-        wOrLDisplay.append(winTextDisplay);
-        document.getElementById('rollButton').disabled = true; 
+        setTimeout(() => {
+            wOrLDisplay.append(winTextDisplay);
+        }, 700);
+        document.getElementById('rollButton').disabled = true;
         // message pop up
-        alert("No more rolls left!");
+        //alert("No more rolls left!");
 
-    }else{
+    } else {
         rollAllDice();
     }
 }
@@ -86,11 +92,15 @@ function rollAllDice() {
     //grab a six from the array if it is present
     let grabSix = rolledArray.find(num => num == 6);
     if (grabSix && needSix) {
+
         //display the dice image in the kept dice area
         let winningDisplay = document.createElement("img");
-        winningDisplay.src = "./media/ship.jpg"
+        winningDisplay.src = "./media/six.png"
         let winRow = document.querySelector(".keptDice");
-        winRow.append(winningDisplay);
+        setTimeout(() => {
+            winRow.append(winningDisplay);
+        }, 800);
+
         needSix = false;
         //remove the six from the array
         let index6 = rolledArray.indexOf(6);
@@ -102,10 +112,13 @@ function rollAllDice() {
 
     let grabFive = rolledArray.find(num => num == 5);
     if (grabFive && needFive && !needSix) {
+
         let winningDisplay = document.createElement("img");
-        winningDisplay.src = "./media/captain.jpg"
+        winningDisplay.src = "./media/five.png"
         let winRow = document.querySelector(".keptDice");
-        winRow.append(winningDisplay);
+        setTimeout(() => {
+            winRow.append(winningDisplay);
+        }, 1000);
         needFive = false;
         let index5 = rolledArray.indexOf(5);
         if (index5 > -1) {
@@ -116,9 +129,11 @@ function rollAllDice() {
     let grabFour = rolledArray.find(num => num == 4);
     if (grabFour && needFour && !needFive && !needSix) {
         let winningDisplay = document.createElement("img");
-        winningDisplay.src = "./media/crew.jpg"
+        winningDisplay.src = "./media/four.png"
         let winRow = document.querySelector(".keptDice");
-        winRow.append(winningDisplay);
+        setTimeout(() => {
+            winRow.append(winningDisplay);
+        }, 800);
         needFour = false;
         let index4 = rolledArray.indexOf(4);
         if (index4 > -1) {
@@ -131,25 +146,17 @@ function rollAllDice() {
         //if doubles are rolled
 
         if (rolledArray[0] === rolledArray[1]) {
-
-            clearImages = document.querySelectorAll(".diceDisplay img")
-            for (let index = 0; index < clearImages.length; index++) {
-                clearImages[index].remove();
-
-            }
-            displayDiceGraphic(rolledArray[0])
-            displayDiceGraphic(rolledArray[1])
-
+            
+            gotDoubles = true;
             let winTextDisplay = document.createElement("img");
             winTextDisplay.src = "./media/skeptical-futurama.gif"
             let wOrLDisplay = document.querySelector(".winOrLose");
-            wOrLDisplay.append(winTextDisplay);
+            setTimeout(() => {
+                wOrLDisplay.append(winTextDisplay);
+            }, 700);
 
             document.getElementById('rollButton').disabled = true;
 
-            console.log("you win")
-            //needDoubles = false;
-            //canRoll = false;
         }
     }
     //clear the array
@@ -159,6 +166,7 @@ function rollAllDice() {
 function displayDiceGraphic(num) {
 
     let display = document.createElement("img");
+
     if (num == 6) {
         display.src = "./media/six.png"
 
@@ -176,9 +184,10 @@ function displayDiceGraphic(num) {
 
     } else if (num == 1) {
         display.src = "./media/one.png"
-
     }
-    let pic = document.querySelector(".diceDisplay");
-    pic.append(display);
+    setTimeout(() => {
+        let pic = document.querySelector(".diceDisplay");
+        pic.append(display);
+    }, 300);
 
 }
