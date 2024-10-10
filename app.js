@@ -42,7 +42,7 @@ function resetGame() {
     needFour = true;
     needDoubles = true;
     canRoll = true;
-    gotDoubles=false;
+    gotDoubles = false;
     return clickCount;
 }
 
@@ -52,19 +52,19 @@ let maxClicks = 3;
 
 function handleButtonClick() {
     clickCount++;
-    if (clickCount > maxClicks ) {
+    if (clickCount > maxClicks) {
+
+
         // Disable the button
         document.getElementById('rollButton').disabled = true;
         //if you're out of rolls
         let winTextDisplay = document.createElement("img");
         winTextDisplay.src = "./media/willy-wonka-and-the-chocolate-factory-gene-wilder.gif"
         let wOrLDisplay = document.querySelector(".winOrLose");
-        setTimeout(() => {
-            wOrLDisplay.append(winTextDisplay);
-        }, 700);
-        document.getElementById('rollButton').disabled = true;
-        // message pop up
-        //alert("No more rolls left!");
+
+        wOrLDisplay.append(winTextDisplay);
+
+
 
     } else {
         rollAllDice();
@@ -146,7 +146,7 @@ function rollAllDice() {
         //if doubles are rolled
 
         if (rolledArray[0] === rolledArray[1]) {
-            
+
             gotDoubles = true;
             let winTextDisplay = document.createElement("img");
             winTextDisplay.src = "./media/skeptical-futurama.gif"
