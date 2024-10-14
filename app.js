@@ -13,7 +13,7 @@ rulesButton.addEventListener('click', displayRules)
 newGame.addEventListener('click', resetGame)
 
 function displayRules() {
-    alert("The player must roll a 6, a 5, and a 4 in that order. These numbers, when rolled, are set aside and are not rolled by the player again. Once these numbers are rolled, the remaining 2 dice are rolled together.  If doubles of any number are rolled, the player recieves a free drink. The player has three rolls to accomplish this.")
+    alert("The player has three shakes. The player must roll a 6, a 5, and a 4 in that order. These numbers, when rolled, are set aside and are not rolled by the player again. Once these numbers are rolled, the remaining 2 dice are rolled together.  If doubles of any number are rolled, the player recieves a free drink. The player has three rolls to accomplish this.")
 }
 
 function resetGame() {
